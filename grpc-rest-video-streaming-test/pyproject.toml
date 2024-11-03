@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "grpc-rest-video-streaming-test"
+version = "0.1.0"
+description = "gRPC와 REST API를 활용한 비디오 스트리밍 테스트 프로젝트"
+authors = ["Your Name <your.email@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.109.0"
+uvicorn = "^0.27.0"
+grpcio = "^1.60.0"
+grpcio-tools = "^1.60.0"
+python-multipart = "^0.0.7"
+aiofiles = "^23.2.1"
+requests = "^2.31.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^8.0.0"
+black = "^24.1.0"
+isort = "^5.13.0"
+flake8 = "^7.0.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api" 

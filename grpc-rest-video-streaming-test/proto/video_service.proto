@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package video;
+
+service VideoService {
+    // Upload a video file
+    rpc UploadVideo (stream VideoChunk) returns (UploadResponse);
+    
+    // Download a video file
+    rpc DownloadVideo (VideoRequest) returns (stream VideoChunk);
+    
+    // List available videos
+    rpc ListVideos (Empty) returns (VideoList);
+}
+
+message VideoChunk {
+    bytes content = 1;
+    string filename = 2;
+}
+
+message UploadResponse {
+    string message = 1;
+    bool success = 2;
+}
+
+message VideoRequest {
+    string filename = 1;
+}
+
+message VideoList {
+    repeated string filenames = 1;
+}
+
+message Empty {} 
