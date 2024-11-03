@@ -18,9 +18,8 @@ RUN poetry config virtualenvs.create false
 COPY pyproject.toml poetry.lock ./
 COPY src ./src
 
-# 의존성 설치 및 프로젝트 설치
-RUN poetry install --no-interaction --no-dev && \
-    pip install -e .
+# 의존성 설치
+RUN poetry install --no-interaction --only main
 
 # 실행
-CMD ["poetry", "run", "uvicorn", "my_fastapi_project.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+CMD ["poetry", "run", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

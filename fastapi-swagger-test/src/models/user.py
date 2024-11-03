@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import Mapper
-from my_fastapi_project.db.session import Base
+from src.db.session import Base
 
 
 class User(Base):

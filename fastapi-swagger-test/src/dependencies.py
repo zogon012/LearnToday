@@ -1,6 +1,6 @@
-from .db.session import get_db
-from .repositories.user import UserRepository
-from .services.user import UserService
+from src.db.session import get_db
+from src.repositories.user import UserRepository
+from src.services.user import UserService
 from fastapi import Depends
 from sqlalchemy.orm import Session
 

@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.openapi.utils import get_openapi
-from my_fastapi_project.api.v1.api import api_router
-from my_fastapi_project.core.config import settings
-from my_fastapi_project.db.session import init_db
+from src.api.v1.api import api_router
+from src.core.config import settings
+from src.db.session import init_db
 
 # 애플리케이션 시작시 테이블 생성
 init_db()

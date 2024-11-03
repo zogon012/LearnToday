@@ -1,7 +1,7 @@
 from typing import List, Optional
-from ..repositories.user import UserRepository
-from ..models.user import User
-from ..schemas.user import UserCreate
+from src.repositories.user import UserRepository
+from src.models.user import User
+from src.schemas.user import UserCreate
 
 
 class UserService:

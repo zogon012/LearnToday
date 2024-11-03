@@ -1,6 +1,6 @@
 from typing import Generic, TypeVar, List, Optional, Type
 from sqlalchemy.orm import Session
-from my_fastapi_project.db.session import Base
+from src.db.session import Base
 
 ModelType = TypeVar("ModelType", bound=Base)
 
