@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  redis:
+    image: "redis:latest"
+    container_name: "redis_queue"
+    ports:
+      - "6379:6379"
+
+  worker:
+    build: .
+    container_name: "chainworker_worker"
+    env_file:
+      - .env
+    depends_on:
+      - redis
+    command: ["celery", "-A", "app.worker.celery_app", "worker", "--loglevel=info"]
