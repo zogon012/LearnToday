@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "todo-list"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.115.13"
+uvicorn = {extras = ["standard"], version = "^0.34.3"}
+sqlalchemy = "^2.0.41"
+asyncpg = "^0.30.0"
+python-dotenv = "^1.1.1"
+pydantic = "^2.11.7"
+psycopg2-binary = "^2.9.10"
+streamlit = "^1.35.0"
+requests = "^2.32.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

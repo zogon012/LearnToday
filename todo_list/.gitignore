@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+
+# VSCode
+.vscode/
+
+# 환경설정 및 기타
+.env
+*.env
+
+# Poetry
+poetry.lock
+
+# Alembic
+alembic/versions/*.pyc
+
+# 기타
+.DS_Store
