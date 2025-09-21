@@ -1,0 +1,1 @@
+"""FastAPI clean architecture example."""
