@@ -1,0 +1,104 @@
+services:
+  # Redis 서비스
+  redis:
+    image: redis:7-alpine
+    container_name: redis-lab
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - redis-network
+
+  # RedisInsight 서비스 (Redis GUI)
+  redisinsight:
+    image: redis/redisinsight:latest
+    container_name: redisinsight-lab
+    ports:
+      - "8001:5540"
+    volumes:
+      - redisinsight_data:/db
+    restart: unless-stopped
+    depends_on:
+      - redis
+    networks:
+      - redis-network
+
+  # Webdis 서비스 (Redis HTTP API)
+  webdis:
+    image: nicolas/webdis:latest
+    platform: linux/amd64
+    container_name: webdis-lab
+    ports:
+      - "7379:7379"
+    volumes:
+      - ./webdis.json:/etc/webdis.json
+    restart: unless-stopped
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - redis-network
+
+  # FastAPI 애플리케이션
+  api:
+    build: .
+    container_name: fastapi-lab
+    ports:
+      - "8000:8000"
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - PYTHONPATH=/app
+    volumes:
+      - ./app:/app/app:ro
+    restart: unless-stopped
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - redis-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # 개발용 FastAPI (핫 리로드)
+  api-dev:
+    build: .
+    container_name: fastapi-lab-dev
+    ports:
+      - "8002:8000"
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - PYTHONPATH=/app
+    volumes:
+      - ./app:/app/app
+    restart: unless-stopped
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - redis-network
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    profiles:
+      - dev
+
+volumes:
+  redis_data:
+    driver: local
+  redisinsight_data:
+    driver: local
+
+networks:
+  redis-network:
+    driver: bridge
