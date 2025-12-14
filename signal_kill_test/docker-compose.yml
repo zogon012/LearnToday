@@ -1,0 +1,15 @@
+services:
+  signal-test-app:
+    build: .
+    container_name: signal-kill-test
+    restart: "no"
+    tty: true
+    stdin_open: true
+    environment:
+      - PYTHONUNBUFFERED=1
+    healthcheck:
+      test: ["CMD", "python", "-c", "import sys; sys.exit(0)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
