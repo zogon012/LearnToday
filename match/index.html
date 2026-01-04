@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>경기 일정 — Match Schedule</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <h1>경기 일정</h1>
+    <div class="controls">
+      <button id="printBtn">PDF로 저장</button>
+    </div>
+  </header>
+
+  <aside id="team-list" class="team-list" aria-label="구단 목록">
+    <div class="tl-header">
+      <input id="team-search" type="search" placeholder="구단 검색" aria-label="구단 검색" />
+      <button id="team-reset" class="btn">모두</button>
+    </div>
+    <ul id="team-items" class="team-items"></ul>
+  </aside>
+
+  <main id="main-content" class="main-content">
+    <div id="container" class="container"></div>
+  </main>
+
+  <footer class="site-footer">데이터: match.csv</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

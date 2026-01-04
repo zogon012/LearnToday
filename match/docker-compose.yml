@@ -1,0 +1,9 @@
+services:
+  web:
+    image: python:3.11-slim
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/usr/src/app
+    working_dir: /usr/src/app
+    command: bash -lc "python -m http.server 8000"
